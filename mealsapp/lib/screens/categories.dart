@@ -23,7 +23,13 @@ class Categories extends StatelessWidget {
     const List<Category> categoryList = categories;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Kategoriler")),
+      appBar: AppBar(
+        title: const Text("Kategoriler"),
+        actions: [
+          // TODO: Favoriler sayfasına geçiş..
+          IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
+        ],
+      ),
       body: GridView(
         padding: const EdgeInsets.all(8),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

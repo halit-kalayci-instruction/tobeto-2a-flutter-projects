@@ -8,3 +8,7 @@ const categories = [
   Category(id: "3", name: "Ana Yemekler", color: Colors.blue),
   Category(id: "4", name: "Tatlılar", color: Colors.lime)
 ];
+
+// BİREYSEL ARAŞTIRMA => Flutter Provider
+
+// Meal_details ekranını tasarlayalım.
