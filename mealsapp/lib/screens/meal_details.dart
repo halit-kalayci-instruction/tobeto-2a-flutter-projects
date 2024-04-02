@@ -39,3 +39,8 @@ class _MealDetailsState extends ConsumerState<MealDetails> {
         ));
   }
 }
+// RiverPod Entegrasyonu
+
+// SharedPreferences - Veri depolama yöntemleri
+// Flutter Responsive Design 
+// 10:35
