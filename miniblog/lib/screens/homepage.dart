@@ -29,10 +29,10 @@ class _HomepageState extends State<Homepage> {
     }
   }
 
-  _changeTheme() {
+  _changeTheme(bool value) {
     setState(() {
-      themeMode = ThemeMode.dark; // Sync
-      _writeThemeData(true);
+      themeMode = value ? ThemeMode.dark : ThemeMode.light; // Sync
+      _writeThemeData(value);
     });
   }
 
@@ -53,11 +53,11 @@ class _HomepageState extends State<Homepage> {
         body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             const Text("Merhaba"),
-            ElevatedButton(
-                onPressed: () {
-                  _changeTheme();
-                },
-                child: const Text("Tema Değiştir"))
+            Switch(
+                value: themeMode == ThemeMode.dark,
+                onChanged: (value) {
+                  _changeTheme(value);
+                })
           ]),
         ),
       ),
