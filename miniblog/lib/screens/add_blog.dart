@@ -18,8 +18,10 @@ class _AddBlogState extends State<AddBlog> {
   XFile? selectedImage;
   String author = "";
 
+  // Business Logic
   void _submit() async {
     if (selectedImage != null) {
+      // Veri Erişim
       Uri url = Uri.parse("https://tobetoapi.halitkalayci.com/api/Articles");
 
       var request = http.MultipartRequest("POST", url);
@@ -48,7 +50,9 @@ class _AddBlogState extends State<AddBlog> {
       selectedImage = file;
     });
   }
+  // Business Logic
 
+  // UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,5 +128,5 @@ class _AddBlogState extends State<AddBlog> {
           ),
         ));
   }
+  // UI
 }
-// 10:05
