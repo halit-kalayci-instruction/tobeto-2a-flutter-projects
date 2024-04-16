@@ -1,9 +1,11 @@
+import 'package:miniblog/models/blog.dart';
+
 abstract class ArticleState {}
 
 class ArticlesNotLoaded extends ArticleState {}
 
 class ArticlesLoaded extends ArticleState {
-  final List<Object> blogs;
+  final List<Blog> blogs;
 
   ArticlesLoaded({required this.blogs});
 }

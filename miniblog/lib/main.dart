@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:miniblog/blocs/articles/article_bloc.dart';
+import 'package:miniblog/repositories/article_repository.dart';
 import 'package:miniblog/screens/homepage.dart';
 import 'package:miniblog/themes/dark_theme.dart';
 import 'package:miniblog/themes/light_theme.dart';
@@ -39,7 +40,7 @@ class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ArticleBloc(),
+      create: (context) => ArticleBloc(articleRepository: ArticleRepository()),
       child: MaterialApp(
         theme: lightTheme,
         darkTheme: darkTheme,
