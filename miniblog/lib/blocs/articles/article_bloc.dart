@@ -21,3 +21,5 @@ class ArticleBloc extends Bloc<ArticleEvent, ArticleState> {
     }
   }
 }
+
+// 11:05

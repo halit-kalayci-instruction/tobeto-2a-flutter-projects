@@ -33,6 +33,9 @@ class _AddBlogState extends State<AddBlog> {
           await http.MultipartFile.fromPath("File", selectedImage!.path);
       request.files.add(file);
 
+      // File türü
+      // base64 türü
+
       final response = await request.send();
 
       if (response.statusCode == 201) {

@@ -11,9 +11,12 @@ class BlogList extends StatefulWidget {
   State<BlogList> createState() => _BlogListState();
 }
 
+// 10:30
 class _BlogListState extends State<BlogList> {
   @override
   Widget build(BuildContext context) {
+    // BlocListener => State değiştiğinde bir kod bloğu çalıştır. (UI'ı tekrar build etmez.)
+    // BlocBuilder => State değiştiğinde UI'i değiştirir.
     return BlocBuilder<ArticleBloc, ArticleState>(builder: (context, state) {
       if (state is ArticlesNotLoaded) {
         context.read<ArticleBloc>().add(FetchArticles());
