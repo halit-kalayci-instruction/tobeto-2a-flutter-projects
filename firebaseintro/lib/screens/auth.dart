@@ -10,13 +10,26 @@ class Auth extends StatefulWidget {
 }
 
 class _AuthState extends State<Auth> {
+  void _submit() async {
+    _registerPage ? _register() : _login();
+  }
+
+  void _login() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: _email, password: _password);
+    } on FirebaseAuthException catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error.message ?? "Giriş Başarısız")));
+    }
+  }
+
   void _register() async {
     UserCredential userCredential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: _email, password: _password);
-
-    print(userCredential);
   }
 
+  bool _registerPage = true;
   final _formKey = GlobalKey<FormState>();
   String _email = "";
   String _password = "";
@@ -34,7 +47,7 @@ class _AuthState extends State<Auth> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      const Text("Kayıt Ol"),
+                      Text(_registerPage ? "Kayıt Ol" : "Giriş Yap"),
                       TextFormField(
                         decoration: const InputDecoration(labelText: "E-posta"),
                         autocorrect: false,
@@ -53,10 +66,21 @@ class _AuthState extends State<Auth> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          _register();
+                          _formKey.currentState!.save();
+                          _submit();
                         },
-                        child: const Text("Kayıt Ol"),
-                      )
+                        child: Text(_registerPage ? "Kayıt Ol" : "Giriş Yap"),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _formKey.currentState!.reset();
+                              _registerPage = !_registerPage;
+                            });
+                          },
+                          child: Text(_registerPage
+                              ? "Zaten üye misiniz? Giriş Yap"
+                              : "Hesabınız yok mu? Kayıt Ol"))
                     ],
                   ),
                 ),
