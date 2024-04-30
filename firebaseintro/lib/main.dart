@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebaseintro/firebase_options.dart';
 import 'package:firebaseintro/screens/auth.dart';
+import 'package:firebaseintro/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -11,6 +13,14 @@ void main() async {
 
 // StreamBuilder => FirebaseAuth.AuthStateChanges
   runApp(
-    const MaterialApp(home: Auth()),
+    MaterialApp(
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) return const Homepage();
+          return const Auth();
+        },
+      ),
+    ),
   );
 }
