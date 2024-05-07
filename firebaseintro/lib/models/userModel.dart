@@ -5,8 +5,14 @@ class UserModel {
   String? firstName;
   String? lastName;
   String? email;
-
-  UserModel({this.id, this.firstName, this.lastName, this.email});
+  String? avatarUrl;
+  UserModel({
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.avatarUrl,
+  });
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
@@ -23,6 +29,9 @@ class UserModel {
     if (email != null) {
       result.addAll({'email': email});
     }
+    if (avatarUrl != null) {
+      result.addAll({'avatarUrl': avatarUrl});
+    }
 
     return result;
   }
@@ -33,6 +42,7 @@ class UserModel {
       firstName: map['firstName'],
       lastName: map['lastName'],
       email: map['email'],
+      avatarUrl: map['avatarUrl'],
     );
   }
 
