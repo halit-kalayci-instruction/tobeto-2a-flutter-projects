@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebaseintro/models/userModel.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,12 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   File? _selectedAvatar;
+
+  @override
+  void initState() {
+    _requestNotificationPermissions();
+    super.initState();
+  }
 
   Future<UserModel> _getUser() async {
     User? loggedInUser = FirebaseAuth.instance.currentUser;
@@ -59,6 +66,28 @@ class _HomepageState extends State<Homepage> {
         .collection("users")
         .doc(userId)
         .update({'avatarUrl': url});
+  }
+
+  void _requestNotificationPermissions() async {
+    // FCM Token
+    FirebaseMessaging fcm = FirebaseMessaging.instance;
+    final permission = await fcm.requestPermission();
+
+    if (permission.authorizationStatus == AuthorizationStatus.authorized) {
+      // FCM Token
+      final token = await fcm.getToken();
+
+      // kullanıcı hangi grupta?
+      // TODO: User verisini fcm token ile güncelle.
+
+      await fcm.subscribeToTopic("mobil1a");
+
+      fcm.onTokenRefresh.listen((token) {
+        // update token in db.
+      });
+
+      print("Firebase Token: $token");
+    }
   }
 
   @override
